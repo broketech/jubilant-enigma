@@ -51,7 +51,10 @@ const marketString = [ // underscore split test pairs
   'eth_ltc',
   'eth_rur'
 ];
-console.log(matchThree(marketSplit));
+
+var tmp = matchThree(marketSplit);
+var mkt = repeats(tmp);
+console.log(mkt);
 
 function matchBoolish(a, b, c){ // returns -1 for none, 0, 1, or 2 for both
   c = 0;  // TWO ELEMENTS ONLY
@@ -88,5 +91,42 @@ function matchThree(a, b, c, d){ // returns array of market combinations based o
       };
     }
   };
+  //repeats(c);
   return c;
+}
+
+function repeats(a, b, c){ // eliminates repeats from market combo list
+  b = a.length;
+  c = []
+  for(z = 0; z < b; z++){
+    a[z].sort(compare2);
+  };
+  a.sort();
+  c.push(a[0]);
+  for(y = 1; y < b; y++){
+    if(equalArr(a[y], c[c.length - 1]) == 0){
+      c.push(a[y]);
+    };
+  }
+  return c;
+}
+
+function equalArr(a, b){  // hardcoded to matchThree output, to assist repeats
+   for(z = 0; z < 3; z++){
+     if((a[z][0] != b[z][0]) || (a[z][1] != b[z][1])){
+       return 0;
+     };
+   };
+   return 1;
+}
+
+function compare(a, b){
+  return a - b;
+}
+
+function compare2(a, b){ // two field sort for strings
+  if(a[0] == b[0]){
+    return a[1].localeCompare(b[1]);
+  }
+  return a[0].localeCompare(b[0]);
 }
