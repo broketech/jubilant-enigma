@@ -2,9 +2,7 @@
 // Should be run at news of market changes, or regular intervals.
 // Static market lists from btc-e included for tests.
 
-//const btce = require('./node.btce.js');
-
-const marketSplit = [ // array split btce test pairs
+/* const marketSplit = [ // array split btce test pairs
   [ 'btc', 'usd' ],  // array with btce markets
   [ 'btc', 'rur' ],
   [ 'btc', 'eur' ],
@@ -26,9 +24,9 @@ const marketSplit = [ // array split btce test pairs
   [ 'eth', 'usd' ],
   [ 'eth', 'ltc' ],
   [ 'eth', 'rur' ]
-];
+]; */
 
-const marketString = [ // underscore split test pairs
+/* const marketString = [ // underscore split test pairs
   'btc_usd',
   'btc_rur',
   'btc_eur',
@@ -50,24 +48,13 @@ const marketString = [ // underscore split test pairs
   'eth_usd',
   'eth_ltc',
   'eth_rur'
-];
+]; */
 
-var tmp = matchThree(marketSplit);
-var mkt = repeats(tmp);
-console.log(mkt);
+//var tmp = matchThree(marketSplit);
+//var mkt = repeats(tmp);
+//console.log(mkt);
 
-function matchBoolish(a, b, c){ // returns -1 for none, 0, 1, or 2 for both
-  c = 0;  // TWO ELEMENTS ONLY
-  if((a[0] === b[0]) || (a[0] === b[1])){
-    c = c + 1;
-  };
-  if((a[1] === b[0]) || (a[1] === b[1])){
-    c = c + 2;
-  };
-  return c - 1;
-}
-
-function matchThree(a, b, c, d){ // returns array of market combinations based on valid markets
+module.exports.matchThree function(a, b, c, d){ // returns array of market combinations based on valid markets
   d = a.length; // a is comma split market list, b is tmp, c is return collection, d is just a.length i guess
   c = [];
   for(z = 0; z < d; z++){
@@ -95,7 +82,7 @@ function matchThree(a, b, c, d){ // returns array of market combinations based o
   return c;
 }
 
-function repeats(a, b, c){ // eliminates repeats from market combo list
+module.exports.repeats function(a, b, c){ // eliminates repeats from market combo list
   b = a.length;
   c = []
   for(z = 0; z < b; z++){
@@ -109,6 +96,17 @@ function repeats(a, b, c){ // eliminates repeats from market combo list
     };
   }
   return c;
+}
+
+function matchBoolish(a, b, c){ // returns -1 for none, 0, 1, or 2 for both
+  c = 0;  // TWO ELEMENTS ONLY
+  if((a[0] === b[0]) || (a[0] === b[1])){
+    c = c + 1;
+  };
+  if((a[1] === b[0]) || (a[1] === b[1])){
+    c = c + 2;
+  };
+  return c - 1;
 }
 
 function equalArr(a, b){  // hardcoded to matchThree output, to assist repeats
